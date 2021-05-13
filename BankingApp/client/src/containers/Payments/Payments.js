@@ -67,7 +67,7 @@ function Payments() {
 				<p>Amount</p>
 				<form action='' className={styles.form}>
 					<input type='text' />
-					<button>Add Comment</button>
+					<button>Add a Comment</button>
 					<button type='submit'>Transfer</button>
 				</form>
 			</div>
