@@ -1,11 +1,23 @@
 .main {
+	width: 95%;
+	height: 60px;
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	margin: 2.5%;
+	border-bottom: 1px solid rgb(143, 141, 141);
+}
+
+.details {
+	margin: 20px;
+	font-size: 10px;
+}
+
+.name {
+	font-size: 18px;
 }
 
 .amount {
-	font-weight: bold;
-	font-size: 25px;
+	margin: 20px;
+	font-size: 24px;
 }

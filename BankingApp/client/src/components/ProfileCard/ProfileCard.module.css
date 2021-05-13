@@ -1,4 +1,25 @@
-.main{
-    display: flex;
-    flex-direction: row;
+.main {
+	width: 120px;
+	height: 100px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+img {
+	width: 50px;
+	height: 50px;
+	object-fit: contain;
+	border-radius: 50%;
+}
+
+.name {
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.headline {
+	font-size: 10px;
+	font-weight: 0;
 }

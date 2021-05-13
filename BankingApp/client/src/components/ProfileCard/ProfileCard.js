@@ -1,16 +1,16 @@
 import React from 'react';
-import { Image } from 'react-bootstrap';
 import styles from './ProfileCard.module.css';
 
 function ProfileCard() {
 	return (
 		<div className={styles.main}>
-			<div className={styles.imageDiv}>
-				<Image src='https://via.placeholder.com/80C/O' roundedCircle />
-			</div>
-			<div className='{styles.info} px-2'>
-				<h1 className='display-6'>John Doe</h1>
-				<p className='text-muted'>IEEE member</p>
+			<img src='https://via.placeholder.com/60C/O' alt='' />
+			<div className={styles.info}>
+				<p className={styles.name}>
+					John Doe
+					<br />
+					<span className={styles.headline}>IEEE member</span>
+				</p>
 			</div>
 		</div>
 	);
