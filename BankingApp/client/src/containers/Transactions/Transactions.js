@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ProfileCard, HistoryItem } from './../../components';
 import styles from './Transactions.module.css';
 
@@ -19,11 +20,15 @@ function Transactions() {
 				</div>
 				<div className={styles.navigate}>
 					<button>Transaction</button>
-					<button>Payment</button>
+					<Link to='/payments'>
+						<button>Payments</button>
+					</Link>
 					<button>Account</button>
 					<button>Statistics</button>
 				</div>
-				<button className={styles.logo}>The Bank</button>
+				<Link to='/'>
+					<button className={styles.logo}>The Bank</button>{' '}
+				</Link>
 			</div>
 			<div className={styles.middle}>
 				<div className={styles.top}>

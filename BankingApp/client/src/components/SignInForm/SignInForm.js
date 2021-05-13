@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import styles from './SignInForm.module.css';
 import { FacebookButton, GoogleButton } from '../../components';
+import { Link } from 'react-router-dom';
 
 function SignInForm() {
 	return (
@@ -23,13 +24,20 @@ function SignInForm() {
 					<Form.Check type='checkbox' label='Remember me' />
 				</Form.Group>
 
-				<Button
-					variant='primary'
-					type='submit'
-					className={styles.submit}
-				>
-					Sign In
-				</Button>
+				{/**
+				 * For testing moving without authentication
+				 *
+				 * */}
+
+				<Link to='/transactions'>
+					<Button
+						variant='primary'
+						type='submit'
+						className={styles.submit}
+					>
+						Sign In
+					</Button>
+				</Link>
 			</Form>
 			<hr />
 			<div>

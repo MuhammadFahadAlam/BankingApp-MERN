@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { ProfileCard, TransactionCard } from './../../components';
 
@@ -20,12 +21,16 @@ function Payments() {
 					</div>
 				</div>
 				<div className={styles.navigate}>
-					<button>Transaction</button>
+					<Link to='/transactions'>
+						<button>Transactions</button>
+					</Link>
 					<button>Payment</button>
 					<button>Account</button>
 					<button>Statistics</button>
 				</div>
-				<button className={styles.logo}>The Bank</button>
+				<Link to='/'>
+					<button className={styles.logo}>The Bank</button>{' '}
+				</Link>
 			</div>
 			<div className={styles.middle}>
 				<div className={styles.top}>

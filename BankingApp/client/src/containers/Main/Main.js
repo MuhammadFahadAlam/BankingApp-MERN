@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Main.module.css';
 import headerImage from '../../assets/images/headerImage.jpg';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function Main() {
 	return (
@@ -16,11 +17,15 @@ function Main() {
 						Our online bank enables anyone from businesses to
 						personal to make transactions securily and comfortably.
 					</p>
-					<Button>Get Started</Button>
+					<Link to='/signup'>
+						<Button>Get Started</Button>
+					</Link>
 				</div>
 			</div>
 			<div className={styles.right}>
-				<button>Sign Up</button>
+				<Link to='/signup'>
+					<Button>Sign Up</Button>
+				</Link>
 				<img className={styles.headerImage} src={headerImage} alt='' />
 			</div>
 		</div>
