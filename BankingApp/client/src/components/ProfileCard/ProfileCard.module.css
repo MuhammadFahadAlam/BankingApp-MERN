@@ -5,6 +5,9 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+	margin: 0px 15px;
+	padding: 0;
+	cursor: pointer;
 }
 
 img {
