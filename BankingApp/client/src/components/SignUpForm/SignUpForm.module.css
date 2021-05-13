@@ -1,0 +1,45 @@
+.main {
+	background-color: white;
+	height: 100%;
+	padding: 30px;
+	background: #ffffff;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
+}
+
+.heading {
+	font-family: 'Comfortaa';
+	padding: 10px 0;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 24px;
+	line-height: 36px;
+	letter-spacing: -0.015em;
+	color: #003d69;
+}
+
+.submit {
+	background: #5c96cb;
+	border-radius: 6px;
+	font-family: Comfortaa;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 20px;
+	border: 0;
+}
+
+.otherOptions {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.other {
+	font-family: Comfortaa;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 20px;
+	color: #21364a;
+}

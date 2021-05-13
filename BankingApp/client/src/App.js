@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { SignIn } from './containers';
+import { SignUp } from './containers';
 
 function App() {
 	return (
 		<div className='App'>
 			<div className='Content'>
-				<SignIn />
+				<SignUp />
 			</div>
 		</div>
 	);

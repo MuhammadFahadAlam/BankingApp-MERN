@@ -2,7 +2,6 @@ import React from 'react';
 
 import styles from './SignIn.module.css';
 import headerImage from '../../assets/images/headerImage.jpg';
-import { Button } from 'react-bootstrap';
 import { SignInForm } from '../../components';
 
 function SignIn() {
