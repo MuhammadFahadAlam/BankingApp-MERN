@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
+.App {
+	background-color: #a6caeb;
+	width: 100%;
+	height: 100vh;
+	padding: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.Content {
+	background-color: white;
+	max-width: 100%;
+	width: 1050px;
+	height: 100%;
+	border-radius: 16px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+		-3px -1px 4px rgba(0, 0, 0, 0.25);
+}
