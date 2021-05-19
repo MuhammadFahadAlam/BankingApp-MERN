@@ -23,7 +23,9 @@ function Transactions() {
 					<Link to='/payments'>
 						<button>Payments</button>
 					</Link>
-					<button>Account</button>
+					<Link to='/accounts'>
+						<button>Account</button>
+					</Link>
 					<button>Statistics</button>
 				</div>
 				<Link to='/'>
