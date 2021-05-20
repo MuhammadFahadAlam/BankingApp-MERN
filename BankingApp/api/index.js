@@ -21,13 +21,14 @@ mongoose
 	.then(() => console.log('Connected to MongoDB...'))
 	.catch((err) => console.error('Could not connect to MongoDB...'));
 
-app.use(helmet());
+//app.use(helmet());
 /**
  * http://localhost:3000/uploads/default.png
  */
+app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, './uploads')));
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8081;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

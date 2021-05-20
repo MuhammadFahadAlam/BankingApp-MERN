@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -7,7 +8,7 @@ const initialState = {
 };
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-	const response = await client.get('/fakeApi/users');
+	const response = await axios.get();
 	return response.users;
 });
 
@@ -16,7 +17,7 @@ export const addNewUser = createAsyncThunk(
 	// The payload creator receives the partial `{title, content, user}` object
 	async (initialUser) => {
 		// We send the initial data to the fake API server
-		const response = await client.post('/fakeApi/transaction', {
+		const response = await axios.post('/fakeApi/transaction', {
 			user: initialUser,
 		});
 		// The response includes the complete post object, including unique ID
