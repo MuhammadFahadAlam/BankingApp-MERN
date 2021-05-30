@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+// State when we start the app
+
 const initialState = {
 	all: [],
 	user: {},
@@ -8,7 +10,11 @@ const initialState = {
 	error: null,
 };
 
+// API base URL
+
 const BASE_URL = 'http://localhost:8081/api/';
+
+// Fetch all users including current user
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
 	const response = await axios.get(BASE_URL + 'users/allUsers', {
@@ -19,6 +25,8 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
 	return response;
 });
 
+// Login user
+
 export const Login = createAsyncThunk('users/Login', async (credentials) => {
 	const response = await axios.post(BASE_URL + 'auth/', credentials);
 
@@ -26,10 +34,14 @@ export const Login = createAsyncThunk('users/Login', async (credentials) => {
 	return response;
 });
 
+// SignUp new User
+
 export const SignUp = createAsyncThunk('users/SignUp', async (User) => {
 	let response = await axios.post(BASE_URL + 'users/', User);
 	return response;
 });
+
+// Add transaction of the current User
 
 export const addTransaction = createAsyncThunk(
 	'users/addTransaction',
@@ -46,6 +58,8 @@ export const addTransaction = createAsyncThunk(
 		return response;
 	}
 );
+
+// User Slice
 
 export const userSlice = createSlice({
 	name: 'user',
@@ -108,10 +122,20 @@ export const userSlice = createSlice({
 	},
 });
 
+// exporting synchronous actions
+
 export const { logout } = userSlice.actions;
+
+// exporting reducer
 
 export default userSlice.reducer;
 
+// selections to use in useSelection hook
+
+// All Users
+
 export const selectAllUsers = (state) => state.users.all;
+
+// Current User
 
 export const selectUserById = (state) => state.users.user;

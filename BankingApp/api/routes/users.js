@@ -51,7 +51,7 @@ var file = upload.single('profileImage');
 
 // Get All Users
 router.get('/allUsers', auth, async (req, res) => {
-	const users = await User.find()
+	const users = await User.find({ _id: { $ne: req.user.id } })
 		.select([
 			'_id',
 			'name',
@@ -65,7 +65,12 @@ router.get('/allUsers', auth, async (req, res) => {
 
 	const currentUser = await User.findById(req.user._id).select([
 		'_id',
+		'name',
 		'isAdmin',
+		'headline',
+		'email',
+		'profileImage',
+		'transactions',
 	]);
 	res.send([users, currentUser]);
 });

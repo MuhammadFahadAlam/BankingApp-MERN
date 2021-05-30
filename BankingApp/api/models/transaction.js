@@ -23,7 +23,7 @@ const transactionSchema = new mongoose.Schema({
 	time: { type: Date, default: Date.now },
 });
 
-const Transaction = mongoose.model('Customer', transactionSchema);
+const Transaction = mongoose.model('Transaction', transactionSchema);
 
 function validateTransaction(transaction) {
 	const schema = Joi.object({

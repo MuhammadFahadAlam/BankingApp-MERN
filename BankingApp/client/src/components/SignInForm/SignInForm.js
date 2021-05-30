@@ -3,13 +3,8 @@ import { Button, Form } from 'react-bootstrap';
 import styles from './SignInForm.module.css';
 import { FacebookButton, GoogleButton } from '../../components';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-	fetchUsers,
-	Login,
-	selectAllUsers,
-	selectUserById,
-} from '../../store/slices/userSlice';
+import { useDispatch } from 'react-redux';
+import { Login } from '../../store/slices/userSlice';
 
 function SignInForm() {
 	const [state, setState] = useState({
@@ -30,7 +25,6 @@ function SignInForm() {
 	function submit(e) {
 		e.preventDefault();
 		dispatch(Login(state));
-		dispatch(fetchUsers());
 	}
 
 	return (
