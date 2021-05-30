@@ -2,17 +2,30 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { GoogleButton, FacebookButton } from './../../components';
 import styles from './SignUpForm.module.css';
-
+import { useDispatch } from 'react-redux';
+import { SignUp } from '../../store/slices/userSlice';
 function SignUpForm() {
-	const [name, setname] = useState('');
-	const [email, setemail] = useState('');
-	const [password, setpassword] = useState('');
+	const [state, setState] = useState({
+		name: '',
+		email: '',
+		password: '',
+	});
 
-	const submit = () => {
-		console.log('Name: ', name);
-		console.log('Email: ', email);
-		console.log('Password: ', password);
-	};
+	const dispatch = useDispatch();
+
+	function handleChange(e) {
+		const value = e.target.value;
+		setState({
+			...state,
+			[e.target.name]: value,
+		});
+	}
+
+	function submit(e) {
+		e.preventDefault();
+		console.log(state);
+		dispatch(SignUp(state));
+	}
 
 	return (
 		<div className={styles.main}>
@@ -23,10 +36,8 @@ function SignUpForm() {
 						name='name'
 						type='text'
 						placeholder='Enter Name'
-						value={name}
-						onChange={(e) => {
-							setname(e.currentTarget.value);
-						}}
+						value={state.name}
+						onChange={handleChange}
 					/>
 				</Form.Group>
 
@@ -34,11 +45,9 @@ function SignUpForm() {
 					<Form.Control
 						name='email'
 						type='email'
-						value={email}
+						value={state.email}
 						placeholder='Email Address'
-						onChange={(e) => {
-							setemail(e.currentTarget.value);
-						}}
+						onChange={handleChange}
 					/>
 				</Form.Group>
 
@@ -47,10 +56,8 @@ function SignUpForm() {
 						name='password'
 						type='password'
 						placeholder='Create Password'
-						value={password}
-						onChange={(e) => {
-							setpassword(e.currentTarget.value);
-						}}
+						value={state.password}
+						onChange={handleChange}
 					/>
 				</Form.Group>
 

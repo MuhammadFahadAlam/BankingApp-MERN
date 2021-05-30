@@ -2,26 +2,48 @@ import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-	items: [],
+	all: [],
+	user: {},
 	status: 'idle',
 	error: null,
 };
 
+const BASE_URL = 'http://localhost:8081/api/';
+
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-	const response = await axios.get();
-	return response.users;
+	const response = await axios.get(BASE_URL + 'users/allUsers', {
+		headers: {
+			'x-auth-token': localStorage.getItem('jwt'),
+		},
+	});
+	return response;
 });
 
-export const addNewUser = createAsyncThunk(
-	'users/addNewUser',
-	// The payload creator receives the partial `{title, content, user}` object
-	async (initialUser) => {
-		// We send the initial data to the fake API server
-		const response = await axios.post('/fakeApi/transaction', {
-			user: initialUser,
-		});
-		// The response includes the complete post object, including unique ID
-		return response.user;
+export const Login = createAsyncThunk('users/Login', async (credentials) => {
+	const response = await axios.post(BASE_URL + 'auth/', credentials);
+
+	// get jwt and store in browser
+	return response;
+});
+
+export const SignUp = createAsyncThunk('users/SignUp', async (User) => {
+	let response = await axios.post(BASE_URL + 'users/', User);
+	return response;
+});
+
+export const addTransaction = createAsyncThunk(
+	'users/addTransaction',
+	async (transaction) => {
+		const response = await axios.post(
+			BASE_URL + 'users/transactions',
+			transaction,
+			{
+				headers: {
+					'x-auth-token': localStorage.getItem('jwt'),
+				},
+			}
+		);
+		return response;
 	}
 );
 
@@ -29,15 +51,14 @@ export const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
-		add: (state) => {
+		logout: (state) => {
 			// Redux Toolkit allows us to write "mutating" logic in reducers. It
 			// doesn't actually mutate the state because it uses the immer library,
 			// which detects changes to a "draft state" and produces a brand new
 			// immutable state based off those changes
-			state.value += 1;
-		},
-		remove: (state) => {
-			state.value -= 1;
+			localStorage.removeItem('jwt');
+			state.users = [];
+			state.user = {};
 		},
 	},
 	extraReducers: {
@@ -46,21 +67,51 @@ export const userSlice = createSlice({
 		},
 		[fetchUsers.fulfilled]: (state, action) => {
 			state.status = 'succeeded';
-			// Add any fetched posts to the array
-			state.items = state.items.concat(action.payload);
+			state.all = action.payload.data[0];
+			state.current = action.payload.data[1];
 		},
 		[fetchUsers.rejected]: (state, action) => {
+			state.status = 'failed';
+			state.error = action.error.message;
+		},
+		[Login.pending]: (state, action) => {
+			state.status = 'loading';
+		},
+		[Login.fulfilled]: (state, action) => {
+			state.status = 'succeeded';
+			localStorage.setItem('jwt', action.payload.data);
+		},
+		[Login.rejected]: (state, action) => {
+			state.status = 'failed';
+			state.error = action.error.message;
+		},
+		[SignUp.pending]: (state, action) => {
+			state.status = 'loading';
+		},
+		[SignUp.fulfilled]: (state, action) => {
+			state.status = 'succeeded';
+		},
+		[SignUp.rejected]: (state, action) => {
+			state.status = 'failed';
+			state.error = action.error.message;
+		},
+		[addTransaction.pending]: (state, action) => {
+			state.status = 'loading';
+		},
+		[addTransaction.fulfilled]: (state, action) => {
+			state.status = 'succeeded';
+		},
+		[addTransaction.rejected]: (state, action) => {
 			state.status = 'failed';
 			state.error = action.error.message;
 		},
 	},
 });
 
-export const { add, remove } = userSlice.actions;
+export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;
 
-export const selectAllUsers = (state) => state.users.items;
+export const selectAllUsers = (state) => state.users.all;
 
-export const selectUserById = (state, userId) =>
-	state.users.items.find((user) => user.id === userId);
+export const selectUserById = (state) => state.users.user;

@@ -49,39 +49,28 @@ function checkFileType(file, cb) {
 // MiddleWare for Single Image Upload
 var file = upload.single('profileImage');
 
-// Get User
-router.get('/me', auth, async (req, res) => {
-	const user = await User.findById(req.user._id);
-	res.send(
-		_.pick(user, [
+// Get All Users
+router.get('/allUsers', auth, async (req, res) => {
+	const users = await User.find()
+		.select([
 			'_id',
 			'name',
-			'headline',
 			'isAdmin',
+			'headline',
 			'email',
 			'profileImage',
 			'transactions',
 		])
-	);
-});
+		.sort('name');
 
-// Get All Users
-router.get('/all', auth, async (req, res) => {
-	const user = await User.find({ _id: { $ne: req.user._id } }).select([
-		'name',
-		'headline',
-		'profileImage',
+	const currentUser = await User.findById(req.user._id).select([
+		'_id',
+		'isAdmin',
 	]);
-	res.send(user);
+	res.send([users, currentUser]);
 });
 
-// List Transactions
-router.get('/transactions', auth, async (req, res) => {
-	const user = await User.findById(req.user._id);
-	res.send(user.transactions);
-});
-
-// Add Transaction
+// Add Transaction of current user
 router.post('/transactions', auth, async (req, res) => {
 	const { error } = validateTransaction(req.body);
 	if (error) return res.status(400).send(error);
@@ -98,11 +87,10 @@ router.post('/transactions', auth, async (req, res) => {
 	res.send(transaction);
 });
 
-// Register
+// Register new user
 router.post('/', file, async (req, res) => {
 	const { error } = validateUser(req.body);
-	console.log(req.file, 'req files');
-	console.log(req.body, 'req body');
+
 	if (error) return res.status(400).send(error.details);
 
 	let user = await User.findOne({ email: req.body.email });

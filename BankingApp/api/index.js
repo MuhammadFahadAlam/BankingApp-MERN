@@ -5,6 +5,7 @@ const auth = require('./routes/auth');
 const express = require('express');
 const helmet = require('helmet');
 const app = express();
+const cors = require('cors');
 
 const path = require('path');
 if (!config.get('jwtPrivateKey')) {
@@ -25,6 +26,8 @@ mongoose
 /**
  * http://localhost:3000/uploads/default.png
  */
+
+app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, './uploads')));
 app.use('/api/users', users);
